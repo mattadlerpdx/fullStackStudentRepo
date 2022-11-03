@@ -30,15 +30,26 @@ const server = http.createServer((req, res) => {
     res.write(`<h1>Exercise 02</h1>`);
 
     res.write(`<ul> ${routeResults} </ul>`);
-  }
-else if (url.pathname === "/attributes") {
+   
+  } else if (url.pathname === "/attributes") {
     params.forEach(function (value, key) {
       tabl = `<td style='border: 5px solid black;'>${key}</td>
-              <td style='border: 5px solid black;'>${value}</td>
-                 `;
+                     <td style='border: 5px solid black;'>${value}</td>
+                `;
+      res.write(`<table style='border: 5px solid black;'> ${tabl} </table>`);
+    });
+  } else if (url.pathname === "items") {
+    params.forEach(function (value, key) {
+      tabl = `<tr><td style='border: 5px solid black;'>${key}</td>
+                     <td style='border: 5px solid black;'>${value}</td>
+                 </tr>`;
       res.write(`<table style='border: 5px solid black;'> ${tabl} </table>`);
     });
   }
+  
+
+
+
   res.end();
 });
 
