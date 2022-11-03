@@ -40,9 +40,9 @@ const server = http.createServer((req, res) => {
     });
   } else if (url.pathname === "items") {
     params.forEach(function (value, key) {
-      tabl = `<tr><td style='border: 5px solid black;'>${key}</td>
+      tabl = `<td style='border: 5px solid black;'>${key}</td>
                      <td style='border: 5px solid black;'>${value}</td>
-                 </tr>`;
+                 `;
       res.write(`<table style='border: 5px solid black;'> ${tabl} </table>`);
     });
   }
