@@ -40,8 +40,39 @@ app.get('/', (req, res) => {
   res.end();
 });
 
-app.get('/welcome', (req, res) => {});
-
+app.get('/welcome', (req, res) => {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.write("<h1>Welcome to the website!</h1>");
+  res.end();
+});
+app.get("/redirect", (req, res) => {
+  res.redirect(302, "/redirected");
+  res.end();
+});
+app.get("/redirected", (req, res) => {
+  res.set(200);
+  res.set({ "Content-Type": "text/html" });
+  res.send(`<h3>You have been successfully redirected.</h3>`);
+  res.end();
+});
+app.get("/cache", (req, res) => {
+  res.status(200);
+  res.set({
+    "Content-Type": "text/html",
+    "Cache-Control": "public, max-age=86400",
+  });
+  res.send(`<p>This resource was cached.</p>`);
+  res.end();
+});
+app.get("/cookie", (req, res) => {
+  res.cookie("hello", "world");
+  res.status(200);
+  res.set({
+    "Content-Type": "text/plain",
+  });
+  res.send(`cookies... yummm`);
+  res.end();
+});
 // Add your code here
 
 app.listen(port, () => {
